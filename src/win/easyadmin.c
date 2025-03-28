@@ -201,51 +201,26 @@ void print_usage(const char *program_name) {
 
 int main(int argc, char *argv[]) {
 	//if (argc < 2) return 1;
-    if (argc < 2) {print_usage(argv[0]); return 1;}
-
-    // System Management Commands
+    if (argc < 2) { print_usage(argv[0]); return 1; }
     if (strcmp(argv[1], "lockscreen") == 0) system_lock_screen();
     else if (strcmp(argv[1], "monitoroff") == 0) system_monitor_off();
     else if (strcmp(argv[1], "standby") == 0) system_standby();
     else if (strcmp(argv[1], "logoff") == 0) system_log_off();
     else if (strcmp(argv[1], "reboot") == 0) system_reboot();
     else if (strcmp(argv[1], "shutdown") == 0) system_shutdown();
-
-    // Sound Management Commands
     else if (strcmp(argv[1], "volumedown") == 0) sound_volume_down();
     else if (strcmp(argv[1], "volumeup") == 0) sound_volume_up();
     else if (strcmp(argv[1], "volumemute") == 0) sound_mute();
-    else if (strcmp(argv[1], "setvolume") == 0) {
-        if (argc != 3) {
-            fprintf(stderr, "Usage: %s setvolume <0-100>\n", argv[0]);
-            return 1;
-        }
-        sound_set_volume(atoi(argv[2]));
-    }
+    else if (strcmp(argv[1], "setvolume") == 0 && argc == 3) sound_set_volume(atoi(argv[2]));
     else if (strcmp(argv[1], "nexttrack") == 0) sound_next_track();
     else if (strcmp(argv[1], "prevtrack") == 0) sound_prev_track();
     else if (strcmp(argv[1], "playpause") == 0) sound_play_pause();
-
-    // Process Management Commands
-    else if (argc == 3 && strcmp(argv[1], "kill") == 0) process_kill_by_name(argv[2]);
-    else if (argc == 3 && strcmp(argv[1], "killpid") == 0) process_kill_by_pid(atoi(argv[2]));
-    else if (strcmp(argv[1], "killnotresp") == 0) process_kill_not_responding();
-
-    // CD-ROM Commands
-    else if (argc == 4 && strcmp(argv[1], "cdrom") == 0) {cdrom_control(argv[2][0], strcmp(argv[3], "open") == 0);}
-
-    // Other Utility Commands
-    else if (argc == 3 && strcmp(argv[1], "brightness") == 0) set_screen_brightness(atoi(argv[2]));
-    else if (argc == 3 && strcmp(argv[1], "wifi") == 0) toggle_wifi(strcmp(argv[2], "on") == 0);
+    else if (strcmp(argv[1], "kill") == 0 && argc == 3) process_kill_by_name(argv[2]);
+    else if (strcmp(argv[1], "killpid") == 0 && argc == 3) process_kill_by_pid(atoi(argv[2]));
     else if (strcmp(argv[1], "sysinfo") == 0) display_system_info();
-    else if (argc == 3 && strcmp(argv[1], "open") == 0) open_program(argv[2]);
-
-    // Unknown Command
-    else {
-        fprintf(stderr, "Unknown command: %s\n", argv[1]);
-        print_usage(argv[0]);
-        return 1;
-    }
-
+    else if (strcmp(argv[1], "open") == 0 && argc == 3) open_program(argv[2]);
+    else if (strcmp(argv[1], "wifi") == 0 && argc == 3) toggle_wifi(strcmp(argv[2], "on") == 0);
+    else if (strcmp(argv[1], "brightness") == 0 && argc == 3) set_screen_brightness(atoi(argv[2]));
+    else { fprintf(stderr, "Unknown command: %s\n", argv[1]); print_usage(argv[0]); return 1; }
     return 0;
 }

@@ -24,8 +24,8 @@
 
 | 📂 **Download Options**        | 🌐 **Link**                                                                                 |
 |--------------------------------|----------------------------------------------------------------------------------------------|
-| **Source code Windows**        | [Open](src/linux/winEasyAdmin.c)                                                             |
-| **Source code Linux**          | [Open](src/win/linuxEasyAdmin.c)                  							                |
+| **Source code Windows**        | [Open](src/win/winEasyAdmin.c)                                                             |
+| **Source code Linux**          | [Open](src/linux/linuxEasyAdmin.c)                  							                |
 | **Download**    				 | [Download Now](https://github.com/Farmerok/module-easyadmin/releases/latest)                 |
 | **Other Releases & Changelog** | [View Releases](https://github.com/Farmerok/module-easyadmin/releases)                       |
 
